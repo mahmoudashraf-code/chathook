@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 120000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            background: white;
+        }
+
+        .spinner {
+            animation: rotator 1.4s linear infinite;
+        }
+
+        @keyframes rotator {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(270deg);
+            }
+        }
+
+        .path {
+            stroke-dasharray: 187;
+            stroke-dashoffset: 0;
+            transform-origin: center;
+            animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+        }
+
+        @keyframes colors {
+            0% {
+                stroke: #4285f4;
+            }
+
+            25% {
+                stroke: #de3e35;
+            }
+
+            50% {
+                stroke: #f7c223;
+            }
+
+            75% {
+                stroke: #1b9a59;
+            }
+
+            100% {
+                stroke: #4285f4;
+            }
+        }
+
+        @keyframes dash {
+            0% {
+                stroke-dashoffset: 187;
+            }
+
+            50% {
+                stroke-dashoffset: 46.75;
+                transform: rotate(135deg);
+            }
+
+            100% {
+                stroke-dashoffset: 187;
+                transform: rotate(450deg);
+            }
+        }
+    </style>
+    <style>
+        pre {
+            margin: 5px;
+        }
+
+        .slider {
+            width: 400%;
+            height: 100%;
+            display: flex;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+        }
+
+        .overflow {
+            overflow: auto;
+        }
+
+        .slide_1 {
+            transform: translateX(0);
+        }
+
+        .slide_2 {
+            transform: translateX(25%);
+        }
+
+        .slide_3 {
+            transform: translateX(50%);
+        }
+
+        .slide_4 {
+            transform: translateX(75%);
+        }
+
+        li {
+            padding: 8px;
+            box-shadow: 0 0 1px;
+            margin: 5px;
+        }
+
+        p {
+            display: inline;
+        }
+
+        textarea {
+            display: block;
+        }
+
+        .flex {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        img {
+            width: 121px;
+        }
+    </style>
+    <style>
+        button {
+            padding: 4px 27px;
+            margin: 9px;
+        }
+
+        input {
+            padding: 5px;
+        }
+
+        td {
+            padding: 0 6px;
+        }
+    </style>
+    <style>
+        #imageContainer {
+            margin: 5px;
+            box-shadow: 0 0 1px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <div open id="loading">
+        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+    </div>
+    <div class="slider">
+        <div class="slide">
+            <table>
+                <tr>
+                    <td>
+                        <label for="name">الاسم</label>
+                    </td>
+                    <td>
+                        <input type="text" id="name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">كلمة المرور</label>
+                    </td>
+                    <td>
+                        <input type="password" id="password">
+                    </td>
+                </tr>
+            </table>
+            <button id="submit">دخول</button>
+        </div>
+        <div class="slide">
+            <pre id="qr"></pre>
+        </div>
+        <div class="slide overflow">
+            <ul id="numbers"></ul>
+        </div>
+        <div class="slide flex">
+            <div class="overflow">
+                <textarea id="numbersList" rows="30" cols="50" value=""></textarea>
+                <button id="download">تحميل</button>
+            </div>
+            <div id="imageContainer" class="overflow"></div>
+        </div>
+    </div>
+</body>
+
+</html>
